@@ -21,8 +21,15 @@ public class NameLoadSystem implements CompileSystem{
 		if(context.getLastSystem() instanceof DotSystem){
 			return "get " + name;
 		}
-		if(name.equals("var")){
+		if(context.getHint() != null){
+			if(context.getHint().equals(VAR_HINT)){
+				return "reserve " + name;
+			}
+		}
+		if(name.equals(VAR_HINT)){
 			context.requireNext(getClass());
+			context.sendHint(VAR_HINT);
+			return "";
 		}
 		return "load " + name;
 	}
