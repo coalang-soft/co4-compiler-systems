@@ -8,7 +8,7 @@ import io.github.coalangsoft.lang.tree.TreeItem;
 public class SemicolonSystem implements CompileSystem{
 
 	@Override
-	public boolean accept(CompileContext context, TreeItem item, boolean asValue) {
+	public boolean accept(CompileContext context, TreeItem item) {
 		if(item.length() != 1){
 			return false;
 		}
@@ -16,8 +16,20 @@ public class SemicolonSystem implements CompileSystem{
 	}
 
 	@Override
-	public String compile(CompileContext context, TreeItem item, boolean asValue) {
-		return "pop";
+	public String compile(CompileContext context, TreeItem item) {
+		StringBuilder b = new StringBuilder();
+		String ret;
+		if(context.hasHint(CommaSystem.MARK)){
+			b.append("invoke 1");
+		}
+		if(context.hasHint(EqualsSystem.MARKER)){
+			ret = "store";
+		}else{ret = "pop";}
+		String s = b.toString().trim();
+		if(!s.isEmpty()){
+			s = s + "\n";
+		}
+		return s + ret;
 	}
 
 }
