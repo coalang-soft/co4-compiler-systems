@@ -31,7 +31,6 @@ public class KeywordSystem implements CompileSystem{
 
 	@Override
 	public String compile(CompileContext context, TreeItem item) {
-//		throw new RuntimeException(name);
 		context.requireNext(next);
 		return "";
 	}

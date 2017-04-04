@@ -24,9 +24,9 @@ public abstract class ComplexSystem implements CompileSystem{
 		
 		String s = Tree.createTree(it, TreeItemType.ROOT).visit(context, new StandardVisitor()).trim();
 		
-		return handleResult(s);
+		return handleResult(context,s);
 	}
 
-	public abstract String handleResult(String s);
+	public abstract String handleResult(CompileContext context, String s);
 
 }

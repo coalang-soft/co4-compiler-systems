@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import coalang.compile.systems.CommaSystem;
+
 import io.github.coalangsoft.lang.context.CompileContext;
 import io.github.coalangsoft.lang.tree.TreeItem;
 import io.github.coalangsoft.lang.tree.TreeItemType;
@@ -21,11 +23,19 @@ public class BlockSystem extends ComplexSystem{
 	}
 
 	@Override
-	public String handleResult(String s) {
+	public String handleResult(CompileContext c, String s) {
 		File f = new File("f" + (counter++) + ".cl0");
+		String add = "";
+		if(c.hasHint(CommaSystem.MARK)){
+			add = "invoke 1\n";
+		}
 		try {
 			FileWriter w = new FileWriter(f);
 			w.write(s);
+			if(!s.trim().isEmpty()){
+				w.write("\n");
+			}
+			w.write(add + "ret");
 			w.close();
 		} catch (IOException e) {
 			throw new RuntimeException(e);

@@ -34,7 +34,7 @@ public class SpecialSystem implements CompileSystem {
 		String handler = map.get(val);
 		
 		if(handler == null){
-			throw new RuntimeException("No special handler found: " + val);
+			item.makeException("No special handler found: " + val);
 		}
 		context.sendHint(MARKER);
 		return handler;

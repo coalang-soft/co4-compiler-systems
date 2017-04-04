@@ -15,7 +15,7 @@ public class GroupSystem extends ComplexSystem {
 	}
 
 	@Override
-	public String handleResult(String s) {
+	public String handleResult(CompileContext c, String s) {
 		if(s.isEmpty()){
 			return "invoke 0";
 		}
